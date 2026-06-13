@@ -11,15 +11,24 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     role ENUM('admin','petugas') NOT NULL
 );
+INSERT INTO users (nama, username, password, role)
+VALUES
+('Admin', 'admin', '12345', 'admin'),
+('Petugas 1', 'petugas1', '12345', 'petugas'),
+('Petugas 2', 'petugas2', '12345', 'petugas');
 
 -- ==========================
 -- TABEL AREA TUNGGU
 -- ==========================
 CREATE TABLE area_tunggu (
     id_area INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
     nama_area VARCHAR(50) NOT NULL,
     kapasitas INT NOT NULL,
-    keterangan TEXT
+    keterangan TEXT,
+
+    FOREIGN KEY (id_user)
+    REFERENCES users(id_user)
 );
 
 -- ==========================
@@ -27,9 +36,13 @@ CREATE TABLE area_tunggu (
 -- ==========================
 CREATE TABLE kapal (
     id_kapal INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
     nama_kapal VARCHAR(100) NOT NULL,
     kapasitas INT NOT NULL,
-    status ENUM('Aktif','Tidak Aktif') DEFAULT 'Aktif'
+    status ENUM('Aktif','Tidak Aktif') DEFAULT 'Aktif',
+
+    FOREIGN KEY (id_user)
+    REFERENCES users(id_user)
 );
 
 -- ==========================
@@ -37,12 +50,20 @@ CREATE TABLE kapal (
 -- ==========================
 CREATE TABLE kendaraan (
     id_kendaraan INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
+    id_area INT NOT NULL,
     no_polisi VARCHAR(20) NOT NULL,
     jenis_kendaraan VARCHAR(50) NOT NULL,
     nama_pengemudi VARCHAR(100) NOT NULL,
     nomor_antrian VARCHAR(20),
-    id_area INT,
-    status ENUM('Menunggu','Ditempatkan','Naik Kapal') DEFAULT 'Menunggu'
+    status ENUM('Menunggu','Ditempatkan','Naik Kapal')
+           DEFAULT 'Menunggu',
+
+    FOREIGN KEY (id_user)
+    REFERENCES users(id_user),
+
+    FOREIGN KEY (id_area)
+    REFERENCES area_tunggu(id_area)
 );
 
 -- ==========================
@@ -50,9 +71,19 @@ CREATE TABLE kendaraan (
 -- ==========================
 CREATE TABLE penempatan (
     id_penempatan INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
     id_kendaraan INT NOT NULL,
-    id_area INT NOT NULL,
-    tanggal_penempatan DATETIME DEFAULT CURRENT_TIMESTAMP
+    id_kapal INT NOT NULL,
+    tanggal_penempatan DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_user)
+    REFERENCES users(id_user),
+
+    FOREIGN KEY (id_kendaraan)
+    REFERENCES kendaraan(id_kendaraan),
+
+    FOREIGN KEY (id_kapal)
+    REFERENCES kapal(id_kapal)
 );
 
 -- ==========================
@@ -60,8 +91,11 @@ CREATE TABLE penempatan (
 -- ==========================
 CREATE TABLE laporan (
     id_laporan INT AUTO_INCREMENT PRIMARY KEY,
-    id_user INT NOT NULL,
+    id_penempatan INT NOT NULL,
     judul VARCHAR(100) NOT NULL,
     isi_laporan TEXT NOT NULL,
-    tanggal DATETIME DEFAULT CURRENT_TIMESTAMP
+    tanggal DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_penempatan)
+    REFERENCES penempatan(id_penempatan)
 );
