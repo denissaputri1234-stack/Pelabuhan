@@ -1,16 +1,27 @@
 <?php
 include "../../config/koneksi.php";
 
-$id = $_GET['id'];
+if (isset($_GET['id'])) {
 
-$data = mysqli_query($koneksi,"
-SELECT * FROM area_tunggu
-WHERE id_area='$id'
-");
+    $id = $_GET['id'];
 
-$row = mysqli_fetch_assoc($data);
+    $query = "SELECT * FROM area_tunggu
+              WHERE id_area = '$id'";
 
-$user = mysqli_query($koneksi,"SELECT * FROM users");
+    $data = mysqli_query($koneksi, $query);
+    $row = mysqli_fetch_assoc($data);
+
+    if (!$row) {
+        echo "Data area tunggu tidak ditemukan!";
+        exit();
+    }
+
+} else {
+    echo "ID area tidak ditemukan!";
+    exit();
+}
+
+$user = mysqli_query($koneksi, "SELECT * FROM users");
 ?>
 
 <h2>Edit Area Tunggu</h2>
@@ -19,24 +30,20 @@ $user = mysqli_query($koneksi,"SELECT * FROM users");
 
     <input type="hidden"
            name="id_area"
-           value="<?= $row['id_area'] ?>">
+           value="<?= $row['id_area']; ?>">
 
     <label>Petugas</label><br>
 
-    <select name="id_user">
+    <select name="id_user" required>
 
-        <?php while($u=mysqli_fetch_assoc($user)){ ?>
+        <?php while ($u = mysqli_fetch_assoc($user)) { ?>
 
-        <option
-        value="<?= $u['id_user'] ?>"
+            <option value="<?= $u['id_user']; ?>"
+                <?= ($u['id_user'] == $row['id_user']) ? 'selected' : ''; ?>>
 
-        <?= ($u['id_user']==$row['id_user'])
-            ? 'selected'
-            : '' ?>>
+                <?= $u['nama']; ?>
 
-            <?= $u['nama'] ?>
-
-        </option>
+            </option>
 
         <?php } ?>
 
@@ -48,7 +55,8 @@ $user = mysqli_query($koneksi,"SELECT * FROM users");
 
     <input type="text"
            name="nama_area"
-           value="<?= $row['nama_area'] ?>">
+           value="<?= $row['nama_area']; ?>"
+           required>
 
     <br><br>
 
@@ -56,16 +64,19 @@ $user = mysqli_query($koneksi,"SELECT * FROM users");
 
     <input type="number"
            name="kapasitas"
-           value="<?= $row['kapasitas'] ?>">
+           value="<?= $row['kapasitas']; ?>"
+           min="1"
+           required>
 
     <br><br>
 
     <label>Keterangan</label><br>
 
-    <textarea name="keterangan"><?= $row['keterangan'] ?></textarea>
+    <textarea name="keterangan" rows="4"><?= $row['keterangan']; ?></textarea>
 
     <br><br>
 
     <button type="submit">Update</button>
+    <a href="index.php">Batal</a>
 
 </form>

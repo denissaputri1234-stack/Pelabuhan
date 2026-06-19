@@ -1,11 +1,20 @@
 <?php
 include "../../../config/koneksi.php";
 
-$id = $_GET['id'];
+if (isset($_GET['id'])) {
 
-mysqli_query($koneksi,"
-DELETE FROM area_tunggu
-WHERE id_area='$id'
-");
+    $id = $_GET['id'];
 
-header("Location: ../index.php");
+    $query = "DELETE FROM area_tunggu
+              WHERE id_area = '$id'";
+
+    if (mysqli_query($koneksi, $query)) {
+        header("Location: ../index.php");
+        exit();
+    } else {
+        echo "Data area tunggu gagal dihapus!";
+    }
+
+} else {
+    echo "ID area tidak ditemukan!";
+}
