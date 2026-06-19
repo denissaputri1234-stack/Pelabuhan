@@ -1,0 +1,38 @@
+body{
+    background:#f1f5f9;
+    font-family:'Segoe UI';
+}
+
+.dashboard{
+    width:90%;
+    margin:40px auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,.08);
+}
+
+.title{
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.logout{
+    display:inline-block;
+
+    background:#ef4444;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:10px 20px;
+
+    border-radius:10px;
+}
