@@ -11,6 +11,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     role ENUM('admin','petugas') NOT NULL
 );
+
 INSERT INTO users (nama, username, password, role)
 VALUES
 ('Admin', 'admin', '12345', 'admin'),
@@ -21,7 +22,7 @@ VALUES
 -- TABEL AREA TUNGGU
 -- ==========================
 CREATE TABLE area_tunggu (
-    id_area INT AUTO_INCREMENT PRIMARY KEY,
+    id_area VARCHAR(10) PRIMARY KEY,
     id_user INT NOT NULL,
     nama_area VARCHAR(50) NOT NULL,
     kapasitas INT NOT NULL,
@@ -30,6 +31,12 @@ CREATE TABLE area_tunggu (
     FOREIGN KEY (id_user)
     REFERENCES users(id_user)
 );
+
+INSERT INTO area_tunggu (id_area, id_user, nama_area, kapasitas, keterangan)
+VALUES
+('A1', 1, 'Area A', 50, 'Area kendaraan kecil'),
+('B1', 1, 'Area B', 75, 'Area kendaraan sedang'),
+('C1', 1, 'Area C', 100, 'Area kendaraan besar');
 
 -- ==========================
 -- TABEL KAPAL
@@ -51,7 +58,7 @@ CREATE TABLE kapal (
 CREATE TABLE kendaraan (
     id_kendaraan INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT NOT NULL,
-    id_area INT NOT NULL,
+    id_area VARCHAR(10) NOT NULL,
     no_polisi VARCHAR(20) NOT NULL,
     jenis_kendaraan VARCHAR(50) NOT NULL,
     nama_pengemudi VARCHAR(100) NOT NULL,
