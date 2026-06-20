@@ -37,8 +37,17 @@ $total_kapal = mysqli_num_rows($data);
     <div class="header">
 
         <div>
+
             <h2>DATA KAPAL</h2>
-            <p>Informasi Kapal Pelabuhan Gilimanuk</p>
+
+            <p>
+                Informasi Kapal Pelabuhan Gilimanuk
+            </p>
+
+            <a href="../dashboard.php">
+                Kembali ke Dashboard
+            </a>
+
         </div>
 
         <form method="GET">
@@ -99,9 +108,11 @@ $total_kapal = mysqli_num_rows($data);
                 </td>
 
                 <td>
+
                     <a href="detail.php?id=<?= $row['id_kapal']; ?>">
                         Detail
                     </a>
+
                 </td>
 
             </tr>
