@@ -21,8 +21,23 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-$user = mysqli_query($koneksi, "SELECT * FROM users");
+$user = mysqli_query($koneksi, "
+SELECT *
+FROM users
+WHERE role='admin'
+");
 ?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Area Tunggu</title>
+
+    <link rel="stylesheet" href="../../assets/css/form.css">
+</head>
+<body>
 
 <h2>Edit Area Tunggu</h2>
 
@@ -32,7 +47,7 @@ $user = mysqli_query($koneksi, "SELECT * FROM users");
            name="id_area"
            value="<?= $row['id_area']; ?>">
 
-    <label>Petugas</label><br>
+    <label>Admin</label><br>
 
     <select name="id_user" required>
 
@@ -53,26 +68,50 @@ $user = mysqli_query($koneksi, "SELECT * FROM users");
 
     <label>Nama Area</label><br>
 
-    <input type="text"
-           name="nama_area"
-           value="<?= $row['nama_area']; ?>"
-           required>
+    <input
+        type="text"
+        name="nama_area"
+        value="<?= $row['nama_area']; ?>"
+        required
+    >
 
     <br><br>
 
     <label>Kapasitas</label><br>
 
-    <input type="number"
-           name="kapasitas"
-           value="<?= $row['kapasitas']; ?>"
-           min="1"
-           required>
+    <input
+        type="number"
+        name="kapasitas"
+        value="<?= $row['kapasitas']; ?>"
+        min="1"
+        required
+    >
+
+    <br><br>
+
+    <label>Status</label><br>
+
+    <select name="status" required>
+
+        <option value="Aktif"
+            <?= ($row['status'] == 'Aktif') ? 'selected' : ''; ?>>
+            Aktif
+        </option>
+
+        <option value="Tidak Aktif"
+            <?= ($row['status'] == 'Tidak Aktif') ? 'selected' : ''; ?>>
+            Tidak Aktif
+        </option>
+
+    </select>
 
     <br><br>
 
     <label>Keterangan</label><br>
 
-    <textarea name="keterangan" rows="4"><?= $row['keterangan']; ?></textarea>
+    <textarea
+        name="keterangan"
+        rows="4"><?= $row['keterangan']; ?></textarea>
 
     <br><br>
 
@@ -80,3 +119,6 @@ $user = mysqli_query($koneksi, "SELECT * FROM users");
     <a href="index.php">Batal</a>
 
 </form>
+
+</body>
+</html>

@@ -32,7 +32,8 @@ $data = mysqli_query($koneksi, $query);
         <th>No</th>
         <th>Nama Area</th>
         <th>Kapasitas</th>
-        <th>Petugas</th>
+        <th>Status</th>
+        <th>Admin</th>
         <th>Aksi</th>
     </tr>
 
@@ -47,6 +48,7 @@ $data = mysqli_query($koneksi, $query);
             <td><?= $no++; ?></td>
             <td><?= $row['nama_area']; ?></td>
             <td><?= $row['kapasitas']; ?></td>
+            <td><?= $row['status']; ?></td>
             <td><?= $row['nama']; ?></td>
 
             <td>
@@ -64,7 +66,7 @@ $data = mysqli_query($koneksi, $query);
     <?php } else { ?>
 
         <tr>
-            <td colspan="5" style="text-align: center;">
+            <td colspan="6" style="text-align: center;">
                 Data area tunggu belum tersedia.
             </td>
         </tr>
