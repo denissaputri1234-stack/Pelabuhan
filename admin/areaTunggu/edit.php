@@ -126,7 +126,7 @@ WHERE role='admin'
         <br><br>
 
         <button type="submit">Update</button>
-        <a href="index.php">Batal</a>
+        <a href="index.php" class="btn-batal">Batal</a>
 
     </form>
 

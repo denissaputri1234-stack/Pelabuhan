@@ -1,7 +1,7 @@
 <?php
 include "../../config/koneksi.php";
 
-$user = mysqli_query($koneksi,"
+$user = mysqli_query($koneksi, "
 SELECT *
 FROM users
 WHERE role='admin'
@@ -77,15 +77,6 @@ WHERE role='admin'
             placeholder="Masukkan kapasitas"
             required
         >
-
-        <br><br>
-
-        <label>Status</label>
-
-        <select name="status" required>
-            <option value="Aktif">Aktif</option>
-            <option value="Tidak Aktif">Tidak Aktif</option>
-        </select>
 
         <br><br>
 

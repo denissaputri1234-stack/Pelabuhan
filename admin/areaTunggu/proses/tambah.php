@@ -7,7 +7,6 @@ if (
         $_POST['id_user'],
         $_POST['nama_area'],
         $_POST['kapasitas'],
-        $_POST['status'],
         $_POST['keterangan']
     )
 ) {
@@ -16,13 +15,12 @@ if (
     $id_user = $_POST['id_user'];
     $nama_area = $_POST['nama_area'];
     $kapasitas = $_POST['kapasitas'];
-    $status = $_POST['status'];
     $keterangan = $_POST['keterangan'];
 
     $query = "INSERT INTO area_tunggu
               (id_area, id_user, nama_area, kapasitas, status, keterangan)
               VALUES
-              ('$id_area', '$id_user', '$nama_area', '$kapasitas', '$status', '$keterangan')";
+              ('$id_area', '$id_user', '$nama_area', '$kapasitas', 'Aktif', '$keterangan')";
 
     if (mysqli_query($koneksi, $query)) {
 
@@ -31,7 +29,7 @@ if (
 
     } else {
 
-        echo "Data area tunggu gagal ditambahkan!";
+        echo "Error MySQL : " . mysqli_error($koneksi);
 
     }
 
