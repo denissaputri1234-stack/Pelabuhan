@@ -37,17 +37,11 @@ $total_kapal = mysqli_num_rows($data);
     <div class="header">
 
         <div>
-
             <h2>DATA KAPAL</h2>
-
-            <p>
-                Informasi Kapal Pelabuhan Gilimanuk
-            </p>
 
             <a href="../dashboard.php">
                 Kembali ke Dashboard
             </a>
-
         </div>
 
         <form method="GET">
@@ -85,49 +79,48 @@ $total_kapal = mysqli_num_rows($data);
             <th>Aksi</th>
         </tr>
 
-        <?php if ($total_kapal > 0) { ?>
+        <?php
+        $no = 1;
 
-            <?php
-            $no = 1;
+        if ($total_kapal > 0) {
 
             while ($row = mysqli_fetch_assoc($data)) {
-            ?>
+        ?>
 
-            <tr>
+        <tr>
 
-                <td><?= $no++; ?></td>
+            <td><?= $no++; ?></td>
 
-                <td><?= $row['nama_kapal']; ?></td>
+            <td><?= $row['nama_kapal']; ?></td>
 
-                <td><?= $row['kapasitas']; ?> Kendaraan</td>
+            <td><?= $row['kapasitas']; ?> Kendaraan</td>
 
-                <td>
-                    <?= ($row['status'] == 'Aktif')
-                        ? 'Berlabuh'
-                        : 'Belum Berlabuh'; ?>
-                </td>
+            <td>
+                <?= ($row['status'] == 'Aktif')
+                    ? 'Berlabuh'
+                    : 'Belum Berlabuh'; ?>
+            </td>
 
-                <td>
+            <td>
+                <a href="detail.php?id=<?= $row['id_kapal']; ?>">
+                    Detail
+                </a>
+            </td>
 
-                    <a href="detail.php?id=<?= $row['id_kapal']; ?>">
-                        Detail
-                    </a>
+        </tr>
 
-                </td>
+        <?php
+            }
+        } else {
+        ?>
 
-            </tr>
+        <tr>
 
-            <?php } ?>
+            <td colspan="5" align="center">
+                Data kapal tidak ditemukan.
+            </td>
 
-        <?php } else { ?>
-
-            <tr>
-
-                <td colspan="5" align="center">
-                    Data kapal tidak ditemukan.
-                </td>
-
-            </tr>
+        </tr>
 
         <?php } ?>
 
