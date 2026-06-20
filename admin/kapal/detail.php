@@ -2,6 +2,11 @@
 
 include '../../config/koneksi.php';
 
+if (!isset($_GET['id'])) {
+    echo "ID kapal tidak ditemukan!";
+    exit();
+}
+
 $id = $_GET['id'];
 
 $data = mysqli_query(
@@ -11,56 +16,66 @@ $data = mysqli_query(
 
 $row = mysqli_fetch_assoc($data);
 
+if (!$row) {
+    echo "Data kapal tidak ditemukan!";
+    exit();
+}
+
+$status_berlabuh = ($row['status'] == 'Aktif')
+    ? 'Berlabuh'
+    : 'Belum Berlabuh';
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Detail Kapal</title>
+
+    <link rel="stylesheet" href="../../assets/css/table.css">
 </head>
 <body>
 
-<center>
+<div class="container">
 
 <h2>DETAIL DATA KAPAL</h2>
 
-<hr width="60%">
-
-<table cellpadding="10">
+<table>
 
     <tr>
-        <td><b>ID Kapal</b></td>
-        <td>:</td>
+        <th width="30%">Keterangan</th>
+        <th>Data</th>
+    </tr>
+
+    <tr>
+        <td>ID Kapal</td>
         <td><?= $row['id_kapal']; ?></td>
     </tr>
 
     <tr>
-        <td><b>Nama Kapal</b></td>
-        <td>:</td>
+        <td>Nama Kapal</td>
         <td><?= $row['nama_kapal']; ?></td>
     </tr>
 
     <tr>
-        <td><b>Kapasitas</b></td>
-        <td>:</td>
-        <td><?= $row['kapasitas']; ?></td>
+        <td>Kapasitas</td>
+        <td><?= $row['kapasitas']; ?> Kendaraan</td>
     </tr>
 
     <tr>
-        <td><b>Status</b></td>
-        <td>:</td>
-        <td><?= $row['status']; ?></td>
+        <td>Status Kapal</td>
+        <td><?= $status_berlabuh; ?></td>
     </tr>
 
 </table>
 
-<hr width="60%">
+<br>
 
-<a href="index.php">
-    Kembali ke Data Kapal
+<a href="index.php" class="btn-add">
+    Kembali
 </a>
 
-</center>
+</div>
 
 </body>
 </html>

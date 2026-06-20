@@ -1,80 +1,72 @@
 <?php
 include '../../config/koneksi.php';
 
-if(isset($_GET['keyword']) && $_GET['keyword'] != ''){
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 
-    $keyword = $_GET['keyword'];
+if ($keyword != '') {
 
-    $data = mysqli_query($koneksi,
-    "SELECT * FROM kapal
-    WHERE nama_kapal LIKE '%$keyword%'");
+    $data = mysqli_query(
+        $koneksi,
+        "SELECT * FROM kapal
+        WHERE nama_kapal LIKE '%$keyword%'"
+    );
 
-}else{
+} else {
 
-    $data = mysqli_query($koneksi,
-    "SELECT * FROM kapal");
+    $data = mysqli_query(
+        $koneksi,
+        "SELECT * FROM kapal"
+    );
 
 }
 
 $total_kapal = mysqli_num_rows($data);
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Data Kapal</title>
+
+    <link rel="stylesheet" href="../../assets/css/table.css">
 </head>
 <body>
 
-    <h2>DATA KAPAL</h2>
+<div class="container">
 
-    <p>Kelola data kapal Pelabuhan Gilimanuk</p>
+    <div class="header">
 
-    <hr>
+        <div>
+            <h2>DATA KAPAL</h2>
+            <p>Informasi Kapal Pelabuhan Gilimanuk</p>
+        </div>
 
-    <table width="100%">
-        <tr>
+        <form method="GET">
 
-            <td>
-                <a href="tambah.php">
-                    + Tambah Kapal
-                </a>
-            </td>
+            <input
+                type="text"
+                name="keyword"
+                placeholder="Cari Kapal..."
+                value="<?= $keyword; ?>"
+            >
 
-            <td align="right">
+            <button type="submit">
+                Cari
+            </button>
 
-                <form method="GET">
+            <a href="index.php">
+                Reset
+            </a>
 
-                    <input
-                        type="text"
-                        name="keyword"
-                        placeholder="Cari Kapal..."
-                        value="<?= isset($_GET['keyword']) ? $_GET['keyword'] : '' ?>"
-                    >
+        </form>
 
-                    <button type="submit">
-                        Cari
-                    </button>
-
-                    <a href="index.php">
-                        Reset
-                    </a>
-
-                </form>
-
-            </td>
-
-        </tr>
-    </table>
-
-    <br>
+    </div>
 
     <p>
         <b>Total Data Kapal : <?= $total_kapal; ?></b>
     </p>
 
-    <table border="1" cellpadding="10" cellspacing="0" width="100%">
+    <table>
 
         <tr>
             <th>No</th>
@@ -84,58 +76,53 @@ $total_kapal = mysqli_num_rows($data);
             <th>Aksi</th>
         </tr>
 
-        <?php
-        $no = 1;
+        <?php if ($total_kapal > 0) { ?>
 
-        while($row = mysqli_fetch_assoc($data)){
-        ?>
+            <?php
+            $no = 1;
 
-        <tr>
+            while ($row = mysqli_fetch_assoc($data)) {
+            ?>
 
-            <td align="center">
-                <?= $no++; ?>
-            </td>
+            <tr>
 
-            <td>
-                <?= $row['nama_kapal']; ?>
-            </td>
+                <td><?= $no++; ?></td>
 
-            <td align="center">
-                <?= $row['kapasitas']; ?>
-            </td>
+                <td><?= $row['nama_kapal']; ?></td>
 
-            <td align="center">
-                <?= $row['status']; ?>
-            </td>
+                <td><?= $row['kapasitas']; ?> Kendaraan</td>
 
-            <td align="center">
+                <td>
+                    <?= ($row['status'] == 'Aktif')
+                        ? 'Berlabuh'
+                        : 'Belum Berlabuh'; ?>
+                </td>
 
-                <a href="detail.php?id=<?= $row['id_kapal']; ?>">
-                    Detail
-                </a>
+                <td>
+                    <a href="detail.php?id=<?= $row['id_kapal']; ?>">
+                        Detail
+                    </a>
+                </td>
 
-                |
+            </tr>
 
-                <a href="edit.php?id=<?= $row['id_kapal']; ?>">
-                    Edit
-                </a>
+            <?php } ?>
 
-                |
+        <?php } else { ?>
 
-                <a
-                    href="proses/hapus.php?id=<?= $row['id_kapal']; ?>"
-                    onclick="return confirm('Yakin ingin menghapus data ini?')"
-                >
-                    Hapus
-                </a>
+            <tr>
 
-            </td>
+                <td colspan="5" align="center">
+                    Data kapal tidak ditemukan.
+                </td>
 
-        </tr>
+            </tr>
 
         <?php } ?>
 
     </table>
+
+</div>
 
 </body>
 </html>
