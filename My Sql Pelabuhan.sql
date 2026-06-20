@@ -75,6 +75,8 @@ CREATE TABLE kendaraan (
     FOREIGN KEY (id_area)
     REFERENCES area_tunggu(id_area)
 );
+ALTER TABLE kendaraan
+ADD no_tiket VARCHAR(30);
 
 ALTER TABLE kendaraan
 ADD no_tiket VARCHAR(30);

@@ -1,3 +1,7 @@
+<?php
+include "../../config/koneksi.php";
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,28 +11,35 @@
 
 <h2>Tambah Kendaraan</h2>
 
-<form action="../proses/tambah.php" method="POST">
+<form action="proses/tambahK.php" method="POST">
 
+    <label>No Polisi</label><br>
+    <input type="text" name="no_polisi" required>
 
-    ID User <br>
-    <input type="number" name="id_user" required><br><br>
+    <br><br>
 
-    ID Area <br>
-    <input type="number" name="id_area" required><br><br>
+    <label>Jenis Kendaraan</label><br>
 
-    No Polisi <br>
-    <input type="text" name="no_polisi" required><br><br>
+    <select name="jenis_kendaraan" required>
+        <option value="">-- Pilih Jenis Kendaraan --</option>
+        <option value="Motor">Motor</option>
+        <option value="Mobil">Mobil</option>
+        <option value="Pickup">Pickup</option>
+        <option value="Minibus">Minibus</option>
+        <option value="Bus">Bus</option>
+        <option value="Truk">Truk</option>
+    </select>
 
-    Jenis Kendaraan <br>
-    <input type="text" name="jenis_kendaraan" required><br><br>
+    <br><br>
 
-    Nama Pengemudi <br>
-    <input type="text" name="nama_pengemudi" required><br><br>
+    <label>Nama Pengemudi</label><br>
+    <input type="text" name="nama_pengemudi" required>
 
-    Nomor Antrian <br>
-    <input type="text" name="nomor_antrian"><br><br>
+    <br><br>
 
-    <button type="submit">Simpan</button>
+    <button type="submit">
+        Simpan
+    </button>
 
 </form>
 
