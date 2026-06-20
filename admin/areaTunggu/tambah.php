@@ -1,7 +1,7 @@
 <?php
 include "../../config/koneksi.php";
 
-$user = mysqli_query($koneksi, "
+$user = mysqli_query($koneksi,"
 SELECT *
 FROM users
 WHERE role='admin'
@@ -19,85 +19,92 @@ WHERE role='admin'
 </head>
 <body>
 
-<h2>Tambah Area Tunggu</h2>
+<div class="form-box">
 
-<form action="proses/tambah.php" method="POST">
+    <h2>Tambah Area Tunggu</h2>
 
-    <label>ID Area</label><br>
-    <input
-        type="text"
-        name="id_area"
-        placeholder="Contoh: D1"
-        maxlength="10"
-        required
-    >
+    <form action="proses/tambah.php" method="POST">
 
-    <br><br>
+        <label>ID Area</label>
 
-    <label>Admin</label><br>
+        <input
+            type="text"
+            name="id_area"
+            placeholder="Contoh : D1"
+            maxlength="10"
+            required
+        >
 
-    <select name="id_user" required>
+        <br><br>
 
-        <option value="" selected disabled>
-            -- Pilih Admin --
-        </option>
+        <label>Admin</label>
 
-        <?php while($u = mysqli_fetch_assoc($user)){ ?>
+        <select name="id_user" required>
 
-            <option value="<?= $u['id_user']; ?>">
-                <?= $u['nama']; ?>
+            <option value="" selected disabled>
+                -- Pilih Admin --
             </option>
 
-        <?php } ?>
+            <?php while($u = mysqli_fetch_assoc($user)){ ?>
 
-    </select>
+                <option value="<?= $u['id_user']; ?>">
+                    <?= $u['nama']; ?>
+                </option>
 
-    <br><br>
+            <?php } ?>
 
-    <label>Nama Area</label><br>
+        </select>
 
-    <input
-        type="text"
-        name="nama_area"
-        placeholder="Masukkan nama area"
-        required
-    >
+        <br><br>
 
-    <br><br>
+        <label>Nama Area</label>
 
-    <label>Kapasitas</label><br>
+        <input
+            type="text"
+            name="nama_area"
+            placeholder="Masukkan nama area"
+            required
+        >
 
-    <input
-        type="number"
-        name="kapasitas"
-        min="1"
-        required
-    >
+        <br><br>
 
-    <br><br>
+        <label>Kapasitas</label>
 
-    <label>Status</label><br>
+        <input
+            type="number"
+            name="kapasitas"
+            min="1"
+            placeholder="Masukkan kapasitas"
+            required
+        >
 
-    <select name="status" required>
-        <option value="Aktif">Aktif</option>
-        <option value="Tidak Aktif">Tidak Aktif</option>
-    </select>
+        <br><br>
 
-    <br><br>
+        <label>Status</label>
 
-    <label>Keterangan</label><br>
+        <select name="status" required>
+            <option value="Aktif">Aktif</option>
+            <option value="Tidak Aktif">Tidak Aktif</option>
+        </select>
 
-    <textarea
-        name="keterangan"
-        rows="4"
-    ></textarea>
+        <br><br>
 
-    <br><br>
+        <label>Keterangan</label>
 
-    <button type="submit">Simpan</button>
-    <a href="index.php">Batal</a>
+        <textarea
+            name="keterangan"
+            rows="4"
+            placeholder="Masukkan keterangan area"
+        ></textarea>
 
-</form>
+        <br><br>
+
+        <button type="submit">Simpan</button>
+        <a href="index.php">Batal</a>
+
+    </form>
+
+</div>
 
 </body>
 </html>

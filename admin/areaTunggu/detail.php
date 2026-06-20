@@ -36,36 +36,48 @@ if (isset($_GET['id'])) {
 </head>
 <body>
 
-<h2>Detail Area Tunggu</h2>
+<div class="form-box">
 
-<p>
-    <strong>Nama Area :</strong>
-    <?= $row['nama_area']; ?>
-</p>
+    <h2>Detail Area Tunggu</h2>
 
-<p>
-    <strong>Kapasitas :</strong>
-    <?= $row['kapasitas']; ?>
-</p>
+    <table class="detail-table">
 
-<p>
-    <strong>Status :</strong>
-    <?= $row['status']; ?>
-</p>
+        <tr>
+            <td><strong>ID Area</strong></td>
+            <td>: <?= $row['id_area']; ?></td>
+        </tr>
 
-<p>
-    <strong>Admin :</strong>
-    <?= $row['nama']; ?>
-</p>
+        <tr>
+            <td><strong>Nama Area</strong></td>
+            <td>: <?= $row['nama_area']; ?></td>
+        </tr>
 
-<p>
-    <strong>Keterangan :</strong>
-    <?= $row['keterangan']; ?>
-</p>
+        <tr>
+            <td><strong>Kapasitas</strong></td>
+            <td>: <?= $row['kapasitas']; ?></td>
+        </tr>
 
-<br>
+        <tr>
+            <td><strong>Status</strong></td>
+            <td>: <?= $row['status']; ?></td>
+        </tr>
 
-<a href="index.php">Kembali</a>
+        <tr>
+            <td><strong>Admin</strong></td>
+            <td>: <?= $row['nama']; ?></td>
+        </tr>
 
-</body>
-</html>
+        <tr>
+            <td><strong>Keterangan</strong></td>
+            <td>: <?= $row['keterangan']; ?></td>
+        </tr>
+
+    </table>
+
+    <br>
+
+    <button type="button" onclick="window.location='index.php'">
+        Kembali
+    </button>
+
+</div>
