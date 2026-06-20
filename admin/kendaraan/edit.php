@@ -4,49 +4,146 @@ include '../../config/koneksi.php';
 
 $id = $_GET['id'];
 
-$data = mysqli_query($conn,
-"SELECT * FROM kendaraan
-WHERE id_kendaraan='$id'");
+$query = "
+SELECT kendaraan.*,
+       area_tunggu.nama_area
+FROM kendaraan
+JOIN area_tunggu
+ON kendaraan.id_area = area_tunggu.id_area
+WHERE kendaraan.id_kendaraan='$id'
+";
+
+$data = mysqli_query($koneksi, $query);
 
 $row = mysqli_fetch_assoc($data);
 
+if(!$row){
+    die("Data kendaraan tidak ditemukan");
+}
+
 ?>
 
-<form action="../proses_kendaraan/edit.php" method="POST">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Kendaraan</title>
 
-<input type="hidden"
-       name="id_kendaraan"
-       value="<?= $row['id_kendaraan']; ?>">
+    <link rel="stylesheet" href="../../assets/css/form.css">
+</head>
+<body>
 
-No Polisi <br>
-<input type="text"
-       name="no_polisi"
-       value="<?= $row['no_polisi']; ?>"><br><br>
+<h2>Edit Kendaraan</h2>
 
-Jenis Kendaraan <br>
-<input type="text"
-       name="jenis_kendaraan"
-       value="<?= $row['jenis_kendaraan']; ?>"><br><br>
+<form action="proses/editK.php" method="POST">
 
-Nama Pengemudi <br>
-<input type="text"
-       name="nama_pengemudi"
-       value="<?= $row['nama_pengemudi']; ?>"><br><br>
+    <input
+        type="hidden"
+        name="id_kendaraan"
+        value="<?= $row['id_kendaraan']; ?>"
+    >
 
-Nomor Antrian <br>
-<input type="text"
-       name="nomor_antrian"
-       value="<?= $row['nomor_antrian']; ?>"><br><br>
+    <label>No Polisi</label><br>
 
-Status <br>
-<select name="status">
-    <option value="Menunggu">Menunggu</option>
-    <option value="Ditempatkan">Ditempatkan</option>
-    <option value="Naik Kapal">Naik Kapal</option>
-</select>
+    <input
+        type="text"
+        name="no_polisi"
+        value="<?= $row['no_polisi']; ?>"
+        required
+    >
 
-<br><br>
+    <br><br>
 
-<button type="submit">Update</button>
+    <label>Jenis Kendaraan</label><br>
+
+    <select name="jenis_kendaraan" required>
+
+        <option value="Mobil"
+        <?= ($row['jenis_kendaraan']=="Mobil") ? "selected" : "" ?>>
+            Mobil
+        </option>
+
+        <option value="Motor"
+        <?= ($row['jenis_kendaraan']=="Motor") ? "selected" : "" ?>>
+            Motor
+        </option>
+
+        <option value="Bus"
+        <?= ($row['jenis_kendaraan']=="Bus") ? "selected" : "" ?>>
+            Bus
+        </option>
+
+        <option value="Truk"
+        <?= ($row['jenis_kendaraan']=="Truk") ? "selected" : "" ?>>
+            Truk
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <label>Nama Pengemudi</label><br>
+
+    <input
+        type="text"
+        name="nama_pengemudi"
+        value="<?= $row['nama_pengemudi']; ?>"
+        required
+    >
+
+    <br><br>
+
+    <label>Area Saat Ini</label><br>
+
+    <input
+        type="text"
+        value="<?= $row['nama_area']; ?> (<?= $row['id_area']; ?>)"
+        readonly
+    >
+
+    <br><br>
+
+    <label>Nomor Antrian</label><br>
+
+    <input
+        type="text"
+        value="<?= $row['nomor_antrian']; ?>"
+        readonly
+    >
+
+    <br><br>
+
+    <label>Status</label><br>
+
+    <select name="status">
+
+        <option value="Menunggu"
+        <?= ($row['status']=="Menunggu") ? "selected" : "" ?>>
+            Menunggu
+        </option>
+
+        <option value="Ditempatkan"
+        <?= ($row['status']=="Ditempatkan") ? "selected" : "" ?>>
+            Ditempatkan
+        </option>
+
+        <option value="Naik Kapal"
+        <?= ($row['status']=="Naik Kapal") ? "selected" : "" ?>>
+            Naik Kapal
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Update
+    </button>
+
+    <a href="index.php">
+        Kembali
+    </a>
 
 </form>
+
+</body>
+</html>

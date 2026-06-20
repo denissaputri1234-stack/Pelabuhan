@@ -1,60 +1,35 @@
 body{
-    background:#f8fafc;
-    font-family:'Segoe UI';
+    background:#f4f6f9;
+    font-family:Segoe UI;
 }
 
-.form-container{
-
+.form-box{
     width:600px;
-
-    margin:50px auto;
-
+    margin:30px auto;
     background:white;
-
     padding:30px;
-
-    border-radius:20px;
-
-    box-shadow:
-    0 5px 20px rgba(0,0,0,.1);
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
 }
 
-.form-container h2{
-    margin-bottom:20px;
-}
-
-.form-group{
-    margin-bottom:15px;
-}
-
-.form-group label{
-    display:block;
-    margin-bottom:8px;
-}
-
-.form-group input,
-.form-group select{
-
+input,
+select,
+textarea{
     width:100%;
-
-    padding:12px;
-
-    border:1px solid #ddd;
-
-    border-radius:10px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
 }
 
-.btn-save{
-
-    background:#22c55e;
-
+button{
+    background:#0d6efd;
     color:white;
-
     border:none;
-
-    padding:12px 20px;
-
-    border-radius:10px;
-
+    padding:10px 20px;
+    border-radius:5px;
     cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
 }

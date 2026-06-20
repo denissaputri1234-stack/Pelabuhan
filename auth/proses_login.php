@@ -4,8 +4,8 @@ session_start();
 
 include "../config/koneksi.php";
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = trim($_POST['username']);
+$password = trim($_POST['password']);
 
 $query = mysqli_query(
     $koneksi,
@@ -14,16 +14,26 @@ $query = mysqli_query(
      AND password='$password'"
 );
 
-$data = mysqli_fetch_assoc($query);
+if(mysqli_num_rows($query) > 0){
 
-if($data){
+    $data = mysqli_fetch_assoc($query);
 
     $_SESSION['login'] = true;
     $_SESSION['id_user'] = $data['id_user'];
     $_SESSION['nama'] = $data['nama'];
     $_SESSION['role'] = $data['role'];
 
-    header("Location: ../index.php");
+    if($data['role'] == 'admin'){
+
+        header("Location: ../admin/dashboard.php");
+
+    }elseif($data['role'] == 'petugas'){
+
+        header("Location: ../Petugas/dashboard.php");
+
+    }
+
+    exit();
 
 }else{
 
