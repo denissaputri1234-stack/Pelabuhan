@@ -96,6 +96,25 @@ $row = mysqli_fetch_assoc($data);
 </button>
 
 </div>
+<div style="text-align:center; margin-top:20px;">
 
+    
+
+    <br><br>
+
+    <a href="index.php"
+       style="
+            display:inline-block;
+            padding:10px 18px;
+            background:#6c757d;
+            color:white;
+            text-decoration:none;
+            border-radius:6px;
+            font-family:Arial;
+       ">
+        ← Kembali
+    </a>
+
+</div>
 </body>
 </html>

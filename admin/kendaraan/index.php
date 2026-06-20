@@ -25,7 +25,17 @@ $data = mysqli_query($koneksi, $query);
 <h2>Data Kendaraan</h2>
 
 <p>
-    <a href="tambah.php">+ Tambah Kendaraan</a>
+
+    <a href="../dashboard.php">
+        ← Kembali ke Dashboard
+    </a>
+
+    |
+
+    <a href="tambah.php">
+        + Tambah Kendaraan
+    </a>
+
 </p>
 
 <table>
@@ -34,7 +44,6 @@ $data = mysqli_query($koneksi, $query);
         <th>No</th>
         <th>No Polisi</th>
         <th>Jenis Kendaraan</th>
-        <th>Pengemudi</th>
         <th>Area Tunggu</th>
         <th>Nomor Antrian</th>
         <th>Status</th>
@@ -57,7 +66,6 @@ $data = mysqli_query($koneksi, $query);
 
             <td><?= $row['jenis_kendaraan']; ?></td>
 
-            <td><?= $row['nama_pengemudi']; ?></td>
 
             <td>
                 <?= $row['nama_area']; ?>

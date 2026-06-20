@@ -6,42 +6,60 @@ include "../../config/koneksi.php";
 <html>
 <head>
     <title>Tambah Kendaraan</title>
+
+    <link rel="stylesheet"
+          href="../../assets/css/form.css">
 </head>
+
 <body>
 
-<h2>Tambah Kendaraan</h2>
+<div class="container">
 
-<form action="proses/tambahK.php" method="POST">
+    <div class="form-box">
 
-    <label>No Polisi</label><br>
-    <input type="text" name="no_polisi" required>
+        <h2>Tambah Kendaraan</h2>
 
-    <br><br>
+        <form action="proses/tambahK.php" method="POST">
 
-    <label>Jenis Kendaraan</label><br>
+            <label>No Polisi</label>
+            <input type="text"
+                   name="no_polisi"
+                   required>
 
-    <select name="jenis_kendaraan" required>
-        <option value="">-- Pilih Jenis Kendaraan --</option>
-        <option value="Motor">Motor</option>
-        <option value="Mobil">Mobil</option>
-        <option value="Pickup">Pickup</option>
-        <option value="Minibus">Minibus</option>
-        <option value="Bus">Bus</option>
-        <option value="Truk">Truk</option>
-    </select>
+            <label>Jenis Kendaraan</label>
 
-    <br><br>
+            <select name="jenis_kendaraan" required>
+                <option value="">-- Pilih Jenis Kendaraan --</option>
+                <option value="Motor">Motor</option>
+                <option value="Mobil">Mobil</option>
+                <option value="Pickup">Pickup</option>
+                <option value="Minibus">Minibus</option>
+                <option value="Bus">Bus</option>
+                <option value="Truk">Truk</option>
+            </select>
 
-    <label>Nama Pengemudi</label><br>
-    <input type="text" name="nama_pengemudi" required>
+            <label>Nama Pengemudi</label>
 
-    <br><br>
+            <input type="text"
+                   name="nama_pengemudi"
+                   required>
 
-    <button type="submit">
-        Simpan
-    </button>
+            <button type="submit">
+                Simpan
+            </button>
 
-</form>
+            <a href="index.php"
+               class="btn-kembali">
+
+               Kembali
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
 
 </body>
 </html>

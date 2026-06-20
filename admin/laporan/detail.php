@@ -1,15 +1,58 @@
 <?php
-include 'koneksi.php';
+
+include "../../config/koneksi.php";
+
 $id = $_GET['id'];
-$result = mysqli_query($conn, "SELECT * FROM laporan_admin WHERE id='$id'");
-$data = mysqli_fetch_assoc($result);
+
+$data = mysqli_query(
+    $koneksi,
+    "
+    SELECT *
+    FROM laporan
+    WHERE id_laporan='$id'
+    "
+);
+
+$row = mysqli_fetch_assoc($data);
+
 ?>
+
 <!DOCTYPE html>
 <html>
-<head><title>Detail Laporan Admin</title></head>
+<head>
+    <title>Detail Laporan</title>
+</head>
 <body>
-    <h2><?= $data['judul'] ?></h2>
-    <p><?= $data['isi'] ?></p>
-    <a href="cetak.php?id=<?= $data['id'] ?>">Cetak</a>
+
+<h2><?= $row['judul']; ?></h2>
+
+<hr>
+
+<p>
+
+<b>Tanggal :</b>
+
+<?= $row['tanggal']; ?>
+
+</p>
+
+<p>
+
+<b>Isi Laporan :</b>
+
+</p>
+
+<p>
+
+<?= nl2br($row['isi_laporan']); ?>
+
+</p>
+
+<hr>
+
+<a href="index.php">
+    Kembali
+</a>
+
 </body>
 </html>

@@ -198,9 +198,28 @@ $kendaraan = mysqli_query(
 </div>
 
 <div class="menu">
-    <a href="kendaraan/index.php">Data Kendaraan</a>
-    <a href="kapal/index.php">Data Kapal</a>
-    <a href="areaTunggu/index.php">Area Tunggu</a>
+
+    <a href="kendaraan/index.php">
+        Data Kendaraan
+    </a>
+
+    <a href="kapal/index.php">
+        Data Kapal
+    </a>
+
+    <a href="areaTunggu/index.php">
+        Area Tunggu
+    </a>
+
+    <a href="laporan/index.php">
+        Laporan
+    </a>
+
+    <a href="../auth/logout.php"
+       style="background:#dc3545;">
+        Logout
+    </a>
+
 </div>
 
 <h2>Monitoring Kendaraan</h2>

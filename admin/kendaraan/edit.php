@@ -24,126 +24,222 @@ if(!$row){
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Edit Kendaraan</title>
+<meta charset="UTF-8">
+<title>Edit Kendaraan</title>
 
-    <link rel="stylesheet" href="../../assets/css/form.css">
+<style>
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    width:700px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+    color:#0d6efd;
+    margin-bottom:25px;
+}
+
+label{
+    font-weight:bold;
+    display:block;
+    margin-bottom:5px;
+}
+
+input,
+select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:5px;
+    box-sizing:border-box;
+}
+
+.readonly{
+    background:#f1f1f1;
+}
+
+.button-group{
+    margin-top:20px;
+}
+
+.btn{
+    display:inline-block;
+    padding:10px 20px;
+    border:none;
+    border-radius:5px;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.btn-update{
+    background:#0d6efd;
+    color:white;
+}
+
+.btn-update:hover{
+    background:#0b5ed7;
+}
+
+.btn-kembali{
+    background:#6c757d;
+    color:white;
+    margin-left:10px;
+}
+
+.btn-kembali:hover{
+    background:#5c636a;
+}
+
+</style>
+
 </head>
 <body>
 
-<h2>Edit Kendaraan</h2>
+<div class="container">
 
-<form action="proses/editK.php" method="POST">
+    <div class="card">
 
-    <input
-        type="hidden"
-        name="id_kendaraan"
-        value="<?= $row['id_kendaraan']; ?>"
-    >
+        <h2>Edit Kendaraan</h2>
 
-    <label>No Polisi</label><br>
+        <form action="proses/editK.php" method="POST">
 
-    <input
-        type="text"
-        name="no_polisi"
-        value="<?= $row['no_polisi']; ?>"
-        required
-    >
+            <input
+                type="hidden"
+                name="id_kendaraan"
+                value="<?= $row['id_kendaraan']; ?>"
+            >
 
-    <br><br>
+            <label>No Polisi</label>
 
-    <label>Jenis Kendaraan</label><br>
+            <input
+                type="text"
+                name="no_polisi"
+                value="<?= $row['no_polisi']; ?>"
+                required
+            >
 
-    <select name="jenis_kendaraan" required>
+            <br>
 
-        <option value="Mobil"
-        <?= ($row['jenis_kendaraan']=="Mobil") ? "selected" : "" ?>>
-            Mobil
-        </option>
+            <label>Jenis Kendaraan</label>
 
-        <option value="Motor"
-        <?= ($row['jenis_kendaraan']=="Motor") ? "selected" : "" ?>>
-            Motor
-        </option>
+            <select name="jenis_kendaraan" required>
 
-        <option value="Bus"
-        <?= ($row['jenis_kendaraan']=="Bus") ? "selected" : "" ?>>
-            Bus
-        </option>
+                <option value="Mobil"
+                <?= ($row['jenis_kendaraan']=="Mobil") ? "selected" : "" ?>>
+                    Mobil
+                </option>
 
-        <option value="Truk"
-        <?= ($row['jenis_kendaraan']=="Truk") ? "selected" : "" ?>>
-            Truk
-        </option>
+                <option value="Motor"
+                <?= ($row['jenis_kendaraan']=="Motor") ? "selected" : "" ?>>
+                    Motor
+                </option>
 
-    </select>
+                <option value="Bus"
+                <?= ($row['jenis_kendaraan']=="Bus") ? "selected" : "" ?>>
+                    Bus
+                </option>
 
-    <br><br>
+                <option value="Truk"
+                <?= ($row['jenis_kendaraan']=="Truk") ? "selected" : "" ?>>
+                    Truk
+                </option>
 
-    <label>Nama Pengemudi</label><br>
+            </select>
 
-    <input
-        type="text"
-        name="nama_pengemudi"
-        value="<?= $row['nama_pengemudi']; ?>"
-        required
-    >
+            <br>
 
-    <br><br>
+            <label>Nama Pengemudi</label>
 
-    <label>Area Saat Ini</label><br>
+            <input
+                type="text"
+                name="nama_pengemudi"
+                value="<?= $row['nama_pengemudi']; ?>"
+                required
+            >
 
-    <input
-        type="text"
-        value="<?= $row['nama_area']; ?> (<?= $row['id_area']; ?>)"
-        readonly
-    >
+            <br>
 
-    <br><br>
+            <label>Area Saat Ini</label>
 
-    <label>Nomor Antrian</label><br>
+            <input
+                type="text"
+                class="readonly"
+                value="<?= $row['nama_area']; ?> (<?= $row['id_area']; ?>)"
+                readonly
+            >
 
-    <input
-        type="text"
-        value="<?= $row['nomor_antrian']; ?>"
-        readonly
-    >
+            <br>
 
-    <br><br>
+            <label>Nomor Antrian</label>
 
-    <label>Status</label><br>
+            <input
+                type="text"
+                class="readonly"
+                value="<?= $row['nomor_antrian']; ?>"
+                readonly
+            >
 
-    <select name="status">
+            <br>
 
-        <option value="Menunggu"
-        <?= ($row['status']=="Menunggu") ? "selected" : "" ?>>
-            Menunggu
-        </option>
+            <label>Status Kendaraan</label>
 
-        <option value="Ditempatkan"
-        <?= ($row['status']=="Ditempatkan") ? "selected" : "" ?>>
-            Ditempatkan
-        </option>
+            <select name="status">
 
-        <option value="Naik Kapal"
-        <?= ($row['status']=="Naik Kapal") ? "selected" : "" ?>>
-            Naik Kapal
-        </option>
+                <option value="Menunggu"
+                <?= ($row['status']=="Menunggu") ? "selected" : "" ?>>
+                    Menunggu
+                </option>
 
-    </select>
+                <option value="Ditempatkan"
+                <?= ($row['status']=="Ditempatkan") ? "selected" : "" ?>>
+                    Ditempatkan
+                </option>
 
-    <br><br>
+                <option value="Naik Kapal"
+                <?= ($row['status']=="Naik Kapal") ? "selected" : "" ?>>
+                    Naik Kapal
+                </option>
 
-    <button type="submit">
-        Update
-    </button>
+            </select>
 
-    <a href="index.php">
-        Kembali
-    </a>
+            <div class="button-group">
 
-</form>
+                <button
+                    type="submit"
+                    class="btn btn-update">
+                    Update Data
+                </button>
+
+                <a
+                    href="index.php"
+                    class="btn btn-kembali">
+                    Kembali
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
 
 </body>
 </html>
