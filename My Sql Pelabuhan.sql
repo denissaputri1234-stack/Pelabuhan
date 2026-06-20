@@ -14,7 +14,8 @@ CREATE TABLE users (
 
 INSERT INTO users (nama, username, password, role)
 VALUES
-('Admin', 'admin', '12345', 'admin'),
+('Admin 1', 'admin1', '12345', 'admin'),
+('Admin 2', 'admin2', '12345', 'admin'),
 ('Petugas 1', 'petugas1', '12345', 'petugas'),
 ('Petugas 2', 'petugas2', '12345', 'petugas');
 
@@ -26,17 +27,19 @@ CREATE TABLE area_tunggu (
     id_user INT NOT NULL,
     nama_area VARCHAR(50) NOT NULL,
     kapasitas INT NOT NULL,
+    status ENUM('Aktif','Tidak Aktif') DEFAULT 'Aktif',
     keterangan TEXT,
 
     FOREIGN KEY (id_user)
     REFERENCES users(id_user)
 );
 
-INSERT INTO area_tunggu (id_area, id_user, nama_area, kapasitas, keterangan)
+INSERT INTO area_tunggu
+(id_area, id_user, nama_area, kapasitas, status, keterangan)
 VALUES
-('A1', 1, 'Area A', 50, 'Area kendaraan kecil'),
-('B1', 1, 'Area B', 75, 'Area kendaraan sedang'),
-('C1', 1, 'Area C', 100, 'Area kendaraan besar');
+('A1', 1, 'Area A', 50, 'Aktif', 'Area kendaraan kecil'),
+('B1', 1, 'Area B', 75, 'Aktif', 'Area kendaraan sedang'),
+('C1', 2, 'Area C', 100, 'Tidak Aktif', 'Area kendaraan besar');
 
 -- ==========================
 -- TABEL KAPAL
@@ -72,6 +75,11 @@ CREATE TABLE kendaraan (
     FOREIGN KEY (id_area)
     REFERENCES area_tunggu(id_area)
 );
+ALTER TABLE kendaraan
+ADD no_tiket VARCHAR(30);
+
+ALTER TABLE kendaraan
+ADD no_tiket VARCHAR(30);
 
 -- ==========================
 -- TABEL PENEMPATAN

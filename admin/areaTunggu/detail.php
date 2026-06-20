@@ -25,26 +25,59 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<h2>Detail Area Tunggu</h2>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Area Tunggu</title>
 
-<p>
-    <strong>Nama Area :</strong>
-    <?= $row['nama_area']; ?>
-</p>
+    <link rel="stylesheet" href="../../assets/css/form.css">
+</head>
+<body>
 
-<p>
-    <strong>Kapasitas :</strong>
-    <?= $row['kapasitas']; ?>
-</p>
+<div class="form-box">
 
-<p>
-    <strong>Petugas :</strong>
-    <?= $row['nama']; ?>
-</p>
+    <h2>Detail Area Tunggu</h2>
 
-<p>
-    <strong>Keterangan :</strong>
-    <?= $row['keterangan']; ?>
-</p>
+    <table class="detail-table">
 
-<a href="index.php">Kembali</a>
+        <tr>
+            <td><strong>ID Area</strong></td>
+            <td>: <?= $row['id_area']; ?></td>
+        </tr>
+
+        <tr>
+            <td><strong>Nama Area</strong></td>
+            <td>: <?= $row['nama_area']; ?></td>
+        </tr>
+
+        <tr>
+            <td><strong>Kapasitas</strong></td>
+            <td>: <?= $row['kapasitas']; ?></td>
+        </tr>
+
+        <tr>
+            <td><strong>Status</strong></td>
+            <td>: <?= $row['status']; ?></td>
+        </tr>
+
+        <tr>
+            <td><strong>Admin</strong></td>
+            <td>: <?= $row['nama']; ?></td>
+        </tr>
+
+        <tr>
+            <td><strong>Keterangan</strong></td>
+            <td>: <?= $row['keterangan']; ?></td>
+        </tr>
+
+    </table>
+
+    <br>
+
+    <button type="button" onclick="window.location='index.php'">
+        Kembali
+    </button>
+
+</div>

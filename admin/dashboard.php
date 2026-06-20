@@ -1,33 +1,61 @@
 <?php
 include '../config/koneksi.php';
 
-// Total kendaraan
-$q1 = mysqli_query($conn, "SELECT COUNT(*) as total FROM kendaraan");
+/* =========================
+   STATISTIK
+========================= */
+
+$q1 = mysqli_query($koneksi,
+"SELECT COUNT(*) AS total FROM kendaraan");
 $total_kendaraan = mysqli_fetch_assoc($q1)['total'];
 
-// Kendaraan menunggu
-$q2 = mysqli_query($conn, "SELECT COUNT(*) as total FROM kendaraan WHERE status='Menunggu'");
+$q2 = mysqli_query($koneksi,
+"SELECT COUNT(*) AS total
+ FROM kendaraan
+ WHERE status='Menunggu'");
 $menunggu = mysqli_fetch_assoc($q2)['total'];
 
-// Kendaraan ditempatkan
-$q3 = mysqli_query($conn, "SELECT COUNT(*) as total FROM kendaraan WHERE status='Ditempatkan'");
+$q3 = mysqli_query($koneksi,
+"SELECT COUNT(*) AS total
+ FROM kendaraan
+ WHERE status='Ditempatkan'");
 $ditempatkan = mysqli_fetch_assoc($q3)['total'];
 
-// Kendaraan naik kapal
-$q4 = mysqli_query($conn, "SELECT COUNT(*) as total FROM kendaraan WHERE status='Naik Kapal'");
+$q4 = mysqli_query($koneksi,
+"SELECT COUNT(*) AS total
+ FROM kendaraan
+ WHERE status='Naik Kapal'");
 $naik_kapal = mysqli_fetch_assoc($q4)['total'];
 
-// Total area tunggu
-$q5 = mysqli_query($conn, "SELECT COUNT(*) as total FROM area_tunggu");
+$q5 = mysqli_query($koneksi,
+"SELECT COUNT(*) AS total
+ FROM area_tunggu");
 $total_area = mysqli_fetch_assoc($q5)['total'];
 
-// Total kapal
-$q6 = mysqli_query($conn, "SELECT COUNT(*) as total FROM kapal");
+$q6 = mysqli_query($koneksi,
+"SELECT COUNT(*) AS total
+ FROM kapal");
 $total_kapal = mysqli_fetch_assoc($q6)['total'];
 
-// Total petugas
-$q7 = mysqli_query($conn, "SELECT COUNT(*) as total FROM users");
+$q7 = mysqli_query($koneksi,
+"SELECT COUNT(*) AS total
+ FROM users
+ WHERE role='petugas'");
 $total_petugas = mysqli_fetch_assoc($q7)['total'];
+
+/* =========================
+   MONITORING KENDARAAN
+========================= */
+
+$kendaraan = mysqli_query(
+    $koneksi,
+    "SELECT kendaraan.*,
+            area_tunggu.nama_area
+     FROM kendaraan
+     JOIN area_tunggu
+     ON kendaraan.id_area = area_tunggu.id_area
+     ORDER BY kendaraan.id_kendaraan DESC"
+);
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +64,9 @@ $total_petugas = mysqli_fetch_assoc($q7)['total'];
     <title>Dashboard Admin</title>
 
     <style>
+
         body{
-            font-family: Arial, sans-serif;
+            font-family:Arial, sans-serif;
             background:#f4f6f9;
             margin:0;
             padding:20px;
@@ -49,7 +78,7 @@ $total_petugas = mysqli_fetch_assoc($q7)['total'];
 
         .container{
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
             gap:20px;
             margin-top:30px;
         }
@@ -73,8 +102,8 @@ $total_petugas = mysqli_fetch_assoc($q7)['total'];
         }
 
         .menu{
-            margin-top:30px;
             text-align:center;
+            margin-top:30px;
         }
 
         .menu a{
@@ -86,7 +115,43 @@ $total_petugas = mysqli_fetch_assoc($q7)['total'];
             margin:5px;
             display:inline-block;
         }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:30px;
+            background:white;
+        }
+
+        table th,
+        table td{
+            border:1px solid #ddd;
+            padding:10px;
+            text-align:center;
+        }
+
+        table th{
+            background:#007bff;
+            color:white;
+        }
+
+        .menunggu{
+            color:orange;
+            font-weight:bold;
+        }
+
+        .ditempatkan{
+            color:blue;
+            font-weight:bold;
+        }
+
+        .naik{
+            color:green;
+            font-weight:bold;
+        }
+
     </style>
+
 </head>
 
 <body>
@@ -133,8 +198,82 @@ $total_petugas = mysqli_fetch_assoc($q7)['total'];
 </div>
 
 <div class="menu">
-    <a href="kendaraan/index.php">Data Kendaraan</a>
+
+    <a href="kendaraan/index.php">
+        Data Kendaraan
+    </a>
+
+    <a href="kapal/index.php">
+        Data Kapal
+    </a>
+
+    <a href="areaTunggu/index.php">
+        Area Tunggu
+    </a>
+
+    <a href="laporan/index.php">
+        Laporan
+    </a>
+
+    <a href="../auth/logout.php"
+       style="background:#dc3545;">
+        Logout
+    </a>
+
 </div>
+
+<h2>Monitoring Kendaraan</h2>
+
+<table>
+
+<tr>
+    <th>No</th>
+    <th>No Polisi</th>
+    <th>Jenis</th>
+    <th>Area</th>
+    <th>Nomor Antrian</th>
+    <th>Status</th>
+</tr>
+
+<?php
+$no = 1;
+
+while($row = mysqli_fetch_assoc($kendaraan)){
+?>
+
+<tr>
+
+    <td><?= $no++ ?></td>
+
+    <td><?= $row['no_polisi'] ?></td>
+
+    <td><?= $row['jenis_kendaraan'] ?></td>
+
+    <td><?= $row['nama_area'] ?></td>
+
+    <td><?= $row['nomor_antrian'] ?></td>
+
+    <td>
+
+        <?php
+        if($row['status']=="Menunggu"){
+            echo "<span class='menunggu'>Menunggu</span>";
+        }
+        elseif($row['status']=="Ditempatkan"){
+            echo "<span class='ditempatkan'>Ditempatkan</span>";
+        }
+        else{
+            echo "<span class='naik'>Naik Kapal</span>";
+        }
+        ?>
+
+    </td>
+
+</tr>
+
+<?php } ?>
+
+</table>
 
 </body>
 </html>

@@ -20,11 +20,13 @@ $data = mysqli_query($koneksi, $query);
 </head>
 <body>
 
+
+
 <h2>Data Area Tunggu</h2>
 
-<p>
-    <a href="tambah.php">Tambah Area</a>
-</p>
+<a href="../dashboard.php" class="btn-kembali">
+    ← 
+</a>
 
 <table>
 
@@ -32,7 +34,8 @@ $data = mysqli_query($koneksi, $query);
         <th>No</th>
         <th>Nama Area</th>
         <th>Kapasitas</th>
-        <th>Petugas</th>
+        <th>Status</th>
+        <th>Admin</th>
         <th>Aksi</th>
     </tr>
 
@@ -47,12 +50,16 @@ $data = mysqli_query($koneksi, $query);
             <td><?= $no++; ?></td>
             <td><?= $row['nama_area']; ?></td>
             <td><?= $row['kapasitas']; ?></td>
+            <td><?= $row['status']; ?></td>
             <td><?= $row['nama']; ?></td>
 
             <td>
-                <a href="detail.php?id=<?= $row['id_area']; ?>">Detail</a> |
-                <a href="edit.php?id=<?= $row['id_area']; ?>">Edit</a> |
-                <a href="proses/hapus.php?id=<?= $row['id_area']; ?>"
+                <a class="detail" href="detail.php?id=<?= $row['id_area']; ?>">Detail</a>
+
+                <a class="edit" href="edit.php?id=<?= $row['id_area']; ?>">Edit</a>
+
+                <a class="hapus"
+                   href="proses/hapus.php?id=<?= $row['id_area']; ?>"
                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                     Hapus
                 </a>
@@ -64,7 +71,7 @@ $data = mysqli_query($koneksi, $query);
     <?php } else { ?>
 
         <tr>
-            <td colspan="5" style="text-align: center;">
+            <td colspan="6" style="text-align:center;">
                 Data area tunggu belum tersedia.
             </td>
         </tr>
@@ -72,6 +79,12 @@ $data = mysqli_query($koneksi, $query);
     <?php } ?>
 
 </table>
+
+<div class="tambah-area">
+    <a href="tambah.php" class="btn-tambah">
+        + Tambah Area
+    </a>
+</div>
 
 </body>
 </html>

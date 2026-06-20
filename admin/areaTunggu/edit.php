@@ -21,62 +21,116 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-$user = mysqli_query($koneksi, "SELECT * FROM users");
+$user = mysqli_query($koneksi,"
+SELECT *
+FROM users
+WHERE role='admin'
+");
 ?>
 
-<h2>Edit Area Tunggu</h2>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Area Tunggu</title>
 
-<form action="proses/edit.php" method="POST">
+    <link rel="stylesheet" href="../../assets/css/form.css">
+</head>
+<body>
 
-    <input type="hidden"
-           name="id_area"
-           value="<?= $row['id_area']; ?>">
+<div class="form-box">
 
-    <label>Petugas</label><br>
+    <h2>Edit Area Tunggu</h2>
 
-    <select name="id_user" required>
+    <form action="proses/edit.php" method="POST">
 
-        <?php while ($u = mysqli_fetch_assoc($user)) { ?>
+        <input
+            type="hidden"
+            name="id_area"
+            value="<?= $row['id_area']; ?>"
+        >
 
-            <option value="<?= $u['id_user']; ?>"
-                <?= ($u['id_user'] == $row['id_user']) ? 'selected' : ''; ?>>
+        <label>Admin</label>
 
-                <?= $u['nama']; ?>
+        <select name="id_user" required>
 
+            <?php while ($u = mysqli_fetch_assoc($user)) { ?>
+
+                <option
+                    value="<?= $u['id_user']; ?>"
+                    <?= ($u['id_user'] == $row['id_user']) ? 'selected' : ''; ?>
+                >
+                    <?= $u['nama']; ?>
+                </option>
+
+            <?php } ?>
+
+        </select>
+
+        <br><br>
+
+        <label>Nama Area</label>
+
+        <input
+            type="text"
+            name="nama_area"
+            value="<?= $row['nama_area']; ?>"
+            required
+        >
+
+        <br><br>
+
+        <label>Kapasitas</label>
+
+        <input
+            type="number"
+            name="kapasitas"
+            value="<?= $row['kapasitas']; ?>"
+            min="1"
+            required
+        >
+
+        <br><br>
+
+        <label>Status</label>
+
+        <select name="status" required>
+
+            <option
+                value="Aktif"
+                <?= ($row['status'] == 'Aktif') ? 'selected' : ''; ?>
+            >
+                Aktif
             </option>
 
-        <?php } ?>
+            <option
+                value="Tidak Aktif"
+                <?= ($row['status'] == 'Tidak Aktif') ? 'selected' : ''; ?>
+            >
+                Tidak Aktif
+            </option>
 
-    </select>
+        </select>
 
-    <br><br>
+        <br><br>
 
-    <label>Nama Area</label><br>
+        <label>Keterangan</label>
 
-    <input type="text"
-           name="nama_area"
-           value="<?= $row['nama_area']; ?>"
-           required>
+        <textarea
+            name="keterangan"
+            rows="4"
+            placeholder="Masukkan keterangan area"
+        ><?= $row['keterangan']; ?></textarea>
 
-    <br><br>
+        <br><br>
 
-    <label>Kapasitas</label><br>
+        <button type="submit">Update</button>
+        <a href="index.php" class="btn-batal">Batal</a>
 
-    <input type="number"
-           name="kapasitas"
-           value="<?= $row['kapasitas']; ?>"
-           min="1"
-           required>
+    </form>
 
-    <br><br>
+</div>
 
-    <label>Keterangan</label><br>
-
-    <textarea name="keterangan" rows="4"><?= $row['keterangan']; ?></textarea>
-
-    <br><br>
-
-    <button type="submit">Update</button>
-    <a href="index.php">Batal</a>
-
-</form>
+</body>
+</html>

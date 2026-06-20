@@ -4,9 +4,18 @@ include '../../config/koneksi.php';
 
 $id = $_GET['id'];
 
-$data = mysqli_query($conn,
-"SELECT * FROM kendaraan
-WHERE id_kendaraan='$id'");
+$data = mysqli_query($koneksi,"
+SELECT
+    kendaraan.*,
+    users.nama,
+    area_tunggu.nama_area
+FROM kendaraan
+JOIN users
+    ON kendaraan.id_user = users.id_user
+JOIN area_tunggu
+    ON kendaraan.id_area = area_tunggu.id_area
+WHERE kendaraan.id_kendaraan='$id'
+");
 
 $row = mysqli_fetch_assoc($data);
 
@@ -50,6 +59,18 @@ $row = mysqli_fetch_assoc($data);
 
 <hr>
 
+<p>
+    <b>Area Tunggu :</b>
+    <?= $row['nama_area']; ?>
+</p>
+
+<p>
+    <b>Diinput Oleh :</b>
+    <?= $row['nama']; ?>
+</p>
+
+<hr>
+
 <p><b>No Tiket :</b> <?= $row['no_tiket']; ?></p>
 
 <p><b>No Polisi :</b> <?= $row['no_polisi']; ?></p>
@@ -75,6 +96,25 @@ $row = mysqli_fetch_assoc($data);
 </button>
 
 </div>
+<div style="text-align:center; margin-top:20px;">
 
+    
+
+    <br><br>
+
+    <a href="index.php"
+       style="
+            display:inline-block;
+            padding:10px 18px;
+            background:#6c757d;
+            color:white;
+            text-decoration:none;
+            border-radius:6px;
+            font-family:Arial;
+       ">
+        ← Kembali
+    </a>
+
+</div>
 </body>
 </html>
