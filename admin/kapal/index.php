@@ -29,22 +29,64 @@ $total_kapal = mysqli_num_rows($data);
     <title>Data Kapal</title>
 
     <link rel="stylesheet" href="../../assets/css/table.css">
+
+    <style>
+
+    .judul{
+        text-align:center;
+        margin-bottom:20px;
+    }
+
+    .header-kapal{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:20px;
+    }
+
+    .btn-dashboard{
+        display:inline-block;
+        background:#2563eb;
+        color:white;
+        text-decoration:none;
+        padding:10px 15px;
+        border-radius:10px;
+        font-weight:500;
+    }
+
+    .search-box{
+        display:flex;
+        align-items:center;
+        gap:8px;
+    }
+
+    .search-box input{
+        padding:8px 12px;
+    }
+
+    .search-box button{
+        padding:8px 12px;
+        cursor:pointer;
+    }
+
+    </style>
+
 </head>
 <body>
 
 <div class="container">
 
-    <div class="header">
+    <div class="judul">
+        <h2>DATA KAPAL</h2>
+    </div>
 
-        <div>
-            <h2>DATA KAPAL</h2>
+    <div class="header-kapal">
 
-            <a href="../dashboard.php">
-                Kembali ke Dashboard
-            </a>
-        </div>
+        <a href="../dashboard.php" class="btn-dashboard">
+            ← Kembali ke Dashboard
+        </a>
 
-        <form method="GET">
+        <form method="GET" class="search-box">
 
             <input
                 type="text"
@@ -115,11 +157,9 @@ $total_kapal = mysqli_num_rows($data);
         ?>
 
         <tr>
-
             <td colspan="5" align="center">
                 Data kapal tidak ditemukan.
             </td>
-
         </tr>
 
         <?php } ?>
