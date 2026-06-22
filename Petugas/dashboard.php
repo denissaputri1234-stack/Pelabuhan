@@ -100,7 +100,21 @@ table td{
 </head>
 
 <body>
+<div style="margin-bottom:20px;">
 
+    <a href="../auth/logout.php"
+       style="
+       background:#dc3545;
+       color:white;
+       padding:10px 20px;
+       text-decoration:none;
+       border-radius:5px;
+       font-weight:bold;
+       ">
+       Logout
+    </a>
+
+</div>
 <h1 class="judul">
     Dashboard Petugas
 </h1>
@@ -139,10 +153,6 @@ table td{
             Laporan
         </a>
 
-        <a href="../auth/logout.php"
-           style="background:#dc3545;">
-            Logout
-        </a>
 
     </div>
 
