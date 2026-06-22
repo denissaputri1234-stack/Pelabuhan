@@ -1,0 +1,118 @@
+body{
+    background:#f4f6f9;
+    font-family:Segoe UI, sans-serif;
+    margin:30px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+table th{
+    background:#0d6efd;
+    color:white;
+    padding:12px;
+    text-align:center;
+}
+
+table td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+table tr:hover{
+    background:#f5f5f5;
+}
+
+a{
+    text-decoration:none;
+}
+
+.btn{
+    display:inline-block;
+    background:#0d6efd;
+    color:white;
+    padding:10px 18px;
+    border-radius:5px;
+    margin-top:20px;
+    margin-right:10px;
+}
+
+.btn:hover{
+    background:#0056b3;
+}
+
+.detail{
+    background:#17a2b8;
+    color:white;
+    padding:6px 10px;
+    border-radius:5px;
+}
+
+.edit{
+    background:#ffc107;
+    color:black;
+    padding:6px 10px;
+    border-radius:5px;
+}
+
+.hapus{
+    background:#dc3545;
+    color:white;
+    padding:6px 10px;
+    border-radius:5px;
+}
+
+.detail:hover{
+    background:#138496;
+}
+
+.edit:hover{
+    background:#e0a800;
+}
+
+.hapus:hover{
+    background:#c82333;
+}
+
+.btn-kembali{
+    display:inline-block;
+    margin:20px 0;
+    padding:10px 18px;
+    background:#6c757d;
+    color:#fff;
+    border-radius:5px;
+    text-decoration:none;
+}
+
+.btn-kembali:hover{
+    background:#5a6268;
+}
+
+.tambah-area{
+    text-align:center;
+    margin-top:25px;
+}
+
+.btn-tambah{
+    display:inline-block;
+    background:#0d6efd;
+    color:#fff;
+    padding:12px 25px;
+    border-radius:5px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.btn-tambah:hover{
+    background:#0b5ed7;
+}
