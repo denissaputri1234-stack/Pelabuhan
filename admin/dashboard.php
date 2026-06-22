@@ -156,7 +156,24 @@ $kendaraan = mysqli_query(
 
 <body>
 
+<div style="margin-bottom:20px;">
+
+    <a href="../auth/logout.php"
+       style="
+       background:#dc3545;
+       color:white;
+       padding:10px 20px;
+       text-decoration:none;
+       border-radius:5px;
+       font-weight:bold;
+       ">
+       Logout
+    </a>
+
+</div>
+
 <h1>Dashboard Admin</h1>
+
 
 <div class="container">
 
@@ -170,10 +187,6 @@ $kendaraan = mysqli_query(
         <p>Kendaraan Menunggu</p>
     </div>
 
-    <div class="card">
-        <h2><?= $ditempatkan ?></h2>
-        <p>Kendaraan Ditempatkan</p>
-    </div>
 
     <div class="card">
         <h2><?= $naik_kapal ?></h2>
@@ -215,10 +228,7 @@ $kendaraan = mysqli_query(
         Laporan
     </a>
 
-    <a href="../auth/logout.php"
-       style="background:#dc3545;">
-        Logout
-    </a>
+
 
 </div>
 
