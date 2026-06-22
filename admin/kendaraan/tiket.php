@@ -81,8 +81,6 @@ $row = mysqli_fetch_assoc($data);
 
 <p><b>Nomor Antrian :</b> <?= $row['nomor_antrian']; ?></p>
 
-<p><b>Status :</b> <?= $row['status']; ?></p>
-
 <p><b>Tanggal :</b> <?= date('d-m-Y H:i'); ?></p>
 
 <hr>
