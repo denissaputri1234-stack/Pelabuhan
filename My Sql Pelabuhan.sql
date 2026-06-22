@@ -55,6 +55,17 @@ CREATE TABLE kapal (
     REFERENCES users(id_user)
 );
 
+INSERT INTO kapal (id_user, nama_kapal, kapasitas, status)
+VALUES
+(1, 'KMP Agung Samudra', 100, 'Aktif'),
+(1, 'KMP Dharma Ferry I', 120, 'Aktif'),
+(1, 'KMP Mutiara Timur', 150, 'Tidak Aktif'),
+(1, 'KMP Nusa Penida', 90, 'Aktif'),
+(1, 'KMP Gilimanuk Express', 110, 'Aktif'),
+(1, 'KMP Bali Nusantara', 130, 'Tidak Aktif'),
+(1, 'KMP Jembrana Sejahtera', 140, 'Aktif'),
+(1, 'KMP Selat Bali Jaya', 160, 'Aktif');
+
 -- ==========================
 -- TABEL KENDARAAN
 -- ==========================
@@ -112,3 +123,4 @@ CREATE TABLE laporan (
     FOREIGN KEY (id_penempatan)
     REFERENCES penempatan(id_penempatan)
 );
+
