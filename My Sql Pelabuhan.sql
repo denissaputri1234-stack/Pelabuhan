@@ -104,16 +104,18 @@ CREATE TABLE penempatan (
 -- ==========================
 -- TABEL LAPORAN
 -- ==========================
-CREATE TABLE laporan (
-    id_laporan INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE area_tunggu (
+    id_area VARCHAR(10) PRIMARY KEY,
     id_user INT NOT NULL,
-    judul VARCHAR(100) NOT NULL,
-    isi_laporan TEXT NOT NULL,
-    tanggal DATETIME DEFAULT CURRENT_TIMESTAMP,
+    nama_area VARCHAR(50) NOT NULL,
+    kapasitas INT NOT NULL,
+    status ENUM('Aktif','Tidak Aktif') DEFAULT 'Aktif',
+    keterangan TEXT,
 
     FOREIGN KEY (id_user)
     REFERENCES users(id_user)
 );
+
 
 INSERT INTO kapal
 (id_user, nama_kapal, kapasitas, status)
